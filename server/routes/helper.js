@@ -1,7 +1,7 @@
 const camelToSnakeCase = (str) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
-const escapeForSql = (str) => str.replace(/'/g, `\\'`);
+const escapeForSql = (str) => str.replace(/'/g, `''`);
 
 const getWhereClause = (filters) => {
   const whereArr = [];

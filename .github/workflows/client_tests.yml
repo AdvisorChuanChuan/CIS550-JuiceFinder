@@ -8,8 +8,9 @@ on:
     branches: [ "main" ]
     paths:
       - 'client/**'
-      - '!*.md'
-      - '!*.css'    
+      - '**.yml'
+      - '!**.md'
+      - '!**.css'    
   pull_request:
     branches: [ "main" ]
     paths:
@@ -41,6 +42,9 @@ jobs:
     - name: Do clean install of node dependencies
       working-directory: ./client
       run: npm ci
+    - name: Lint code with ESLint
+      working-directory: ./client
+      run: npx eslint .
     - name: Build client
       working-directory: ./client
       run: npm run build --if-present
