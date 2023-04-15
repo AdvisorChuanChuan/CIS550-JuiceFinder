@@ -39,6 +39,9 @@ jobs:
     - name: Do clean install of node dependencies
       working-directory: ./server
       run: npm ci
+    - name: Lint code with ESLint
+      working-directory: ./server
+      run: npx eslint .      
     - name: Build server
       working-directory: ./server
       run: npm run build --if-present
