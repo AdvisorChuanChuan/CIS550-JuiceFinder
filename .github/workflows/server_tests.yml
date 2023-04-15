@@ -8,7 +8,8 @@ on:
     branches: [ "main" ]
     paths:
       - 'server/**'
-      - '!*.md'
+      - '**.yml'
+      - '!**.md'
   pull_request:
     branches: [ "main" ]
     paths:
