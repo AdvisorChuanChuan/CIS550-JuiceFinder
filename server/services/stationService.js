@@ -36,6 +36,10 @@ const getWhereClause = async (filters, isElectric = false) => {
     );
   }
 
+  if (!filters.private) {
+    whereArr.push("access_code='public'");
+  }
+
   Object.keys(filters).forEach((key) => {
     const sqlColName = camelToSnakeCase(key); // default column names in MySQL if not specified
     const sqlColValue = escapeForSql(filters[key]);
@@ -55,6 +59,7 @@ const getWhereClause = async (filters, isElectric = false) => {
       case "longitude":
       case "mileDistance":
       case "streetAddress":
+      case "private":
         break;
       default:
         unsupportedFilters[key] = filters[key];
