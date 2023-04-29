@@ -106,9 +106,9 @@ function OverviewTab() {
         flexDirection: "column",
       }}
     >
-      <Box>
-        <Grid container>
-          <Grid item xs={12} padding={2}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container paddingTop={0}>
+          <Grid item xs={12} padding={5}>
             <Box
               sx={{
                 display: "flex",
@@ -129,21 +129,21 @@ function OverviewTab() {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Container>{plt.afsByTypePie()}</Container>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={7.5}>
             {plt.afsByStateMap()}
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={0.5}>
             {plt.mapLegend()}
           </Grid>
         </Grid>
       </Box>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container>
-          <Grid item xs={12} padding={3}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container paddingTop={7}>
+          <Grid item xs={12} padding={5}>
             <Box
               sx={{
                 display: "flex",
@@ -156,7 +156,9 @@ function OverviewTab() {
               <Typography
                 component="div"
                 variant="h6"
-                sx={{ color: theme.palette.primary.main }}
+                sx={{
+                  color: theme.palette.primary.main,
+                }}
               >
                 Alternative fueling stations count by state in US
               </Typography>
@@ -179,9 +181,9 @@ function OverviewTab() {
         </Grid>
       </Box>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container>
-          <Grid item xs={12} padding={3}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container paddingTop={7}>
+          <Grid item xs={12} padding={5}>
             <Box
               sx={{
                 display: "flex",

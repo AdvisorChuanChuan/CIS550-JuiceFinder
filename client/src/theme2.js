@@ -4,10 +4,12 @@ const lightThemeOptions = {
   palette: {
     type: "light",
     primary: {
-      main: "#05668D",
+      // main: "#05668D",
+      main: "#014781",
     },
     secondary: {
-      main: "#F0F3BD",
+      // main: "#F0F3BD",
+      main: "#ffffff",
     },
     success: {
       main: "#02C39A",
@@ -101,10 +103,12 @@ const darkThemeOptions = {
   palette: {
     type: "dark",
     primary: {
-      main: "#F0F3BD",
+      // main: "#F0F3BD",
+      main: "#f7f097",
     },
     secondary: {
-      main: "#02C39A",
+      main: "#000000",
+      // main: "#f5f5f5",
     },
     success: {
       main: "#02C39A",
@@ -117,8 +121,10 @@ const darkThemeOptions = {
       secondary: "rgba(222,222,222,0.7)",
     },
     background: {
-      default: "#121212",
-      paper: "#3c3e40",
+      // default: "#121212",
+      default: "#000000",
+      // paper: "#1f1f1f",
+      paper: "#0c0c00",
       landing: "#121212",
     },
   },

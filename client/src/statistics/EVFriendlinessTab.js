@@ -136,8 +136,8 @@ function EVFriendlinessTab() {
         flexDirection: "column",
       }}
     >
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container spacing={2} paddingTop={3}>
           <Grid item xs={12}>
             <Box
               sx={{
@@ -153,13 +153,16 @@ function EVFriendlinessTab() {
                 variant="h6"
                 sx={{ color: theme.palette.primary.main }}
               >
-                How hard to find a charging stations?
+                How hard to find a charging station?
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={12}>
             <Container>{plt.stationToVehicleBar(stationToVehicle)}</Container>
           </Grid>
+        </Grid>
+
+        <Grid container spacing={2} paddingTop={7}>
           <Grid item xs={12}>
             <Box
               sx={{

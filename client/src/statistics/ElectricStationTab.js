@@ -180,8 +180,8 @@ function ElectricStationTab() {
         flexDirection: "column",
       }}
     >
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container spacing={2} paddingTop={0}>
           <Grid item xs={6} />
           <Grid item xs={3}>
             <Container>
@@ -208,9 +208,9 @@ function ElectricStationTab() {
         </Grid>
       </Box>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container spacing={2} paddingTop={3}>
+          <Grid item xs={12} padding={3}>
             <Box
               sx={{
                 display: "flex",
@@ -254,9 +254,9 @@ function ElectricStationTab() {
         </Grid>
       </Box>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container spacing={2} paddingTop={10}>
+          <Grid item xs={12} padding={3}>
             <Box
               sx={{
                 display: "flex",
@@ -270,7 +270,7 @@ function ElectricStationTab() {
                 variant="h6"
                 sx={{ color: theme.palette.primary.main }}
               >
-                Number of charging ports with different speed level in US
+                Number of charging ports with different speed levels in US
               </Typography>
             </Box>
           </Grid>
@@ -300,9 +300,9 @@ function ElectricStationTab() {
         </Grid>
       </Box>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 12 }}>
+        <Grid container spacing={2} paddingTop={10}>
+          <Grid item xs={12} padding={3}>
             <Box
               sx={{
                 display: "flex",

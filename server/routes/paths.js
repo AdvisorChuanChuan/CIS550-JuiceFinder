@@ -173,7 +173,7 @@ router.get("/stationsNearPath/:startAddress/:destAddress", async (req, res) => {
   // Combine the queries
   const query = `
     SELECT DISTINCT sid, ST_Y(location) AS longitude, ST_X(location) AS latitude
-    FROM stations S NATURAL JOIN electric_stations E NATURAL JOIN station_ports SP
+    FROM materialized_view_electric_stations_denorm E
     WHERE ST_DISTANCE(
       location,
       ST_SRID(ST_GEOMFROMTEXT('LINESTRING(${linestringArr})'), 4326)

@@ -12,6 +12,7 @@ import {
   Radio,
   RadioGroup,
   Button,
+  Checkbox,
 } from "@mui/material";
 
 import stateDict from "../assets/states_hash.json";
@@ -35,6 +36,9 @@ export default function StationInput({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  vehiclePorts,
+  matchVehicle,
+  setMatchVehicle,
   formError,
   setFormError,
   formErrorText,
@@ -55,143 +59,170 @@ export default function StationInput({
   return (
     <form onSubmit={handleSubmit}>
       <FormControl error={formError} fullWidth>
-        <div id="station-form" style={{ height: "75vh", display: "grid" }}>
+        <Box sx={{ width: "min-content" }}>
           <Box
-            sx={{ width: "min-content", height: "70vh", overflow: "scroll" }}
-            id="station-input-fields"
+            sx={{
+              "& .MuiTextField-root": {
+                my: 1,
+                width: "30ch",
+              },
+            }}
           >
-            <Box
-              sx={{
-                "& .MuiTextField-root": {
-                  my: 1,
-                  width: "30ch",
-                },
-              }}
+            <h3>Location</h3>
+            <TextField
+              select
+              variant="outlined"
+              color="secondary"
+              label="State"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
             >
-              <h3>Location</h3>
-              <TextField
-                select
-                variant="outlined"
-                color="secondary"
-                label="State"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-              >
-                {Object.entries(stateDict).map(([abbrev, full]) => (
-                  <MenuItem key={full} value={abbrev}>
-                    {abbrev}
-                  </MenuItem>
-                ))}
-              </TextField>
+              {Object.entries(stateDict).map(([abbrev, full]) => (
+                <MenuItem key={full} value={abbrev}>
+                  {abbrev}
+                </MenuItem>
+              ))}
+            </TextField>
 
-              <TextField
-                type="text"
-                variant="outlined"
-                color="secondary"
-                label="City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <TextField
-                type="text"
-                variant="outlined"
-                color="secondary"
-                label="Street Address"
-                value={streetAddress}
-                onChange={(e) => setStreetAddress(e.target.value)}
-              />
-              <TextField
-                type="text"
-                variant="outlined"
-                color="secondary"
-                label="Zip Code"
-                value={zip}
-                onChange={(e) => setZip(e.target.value)}
-              />
-              {formError && <FormHelperText>{formErrorText}</FormHelperText>}
-              <FormControl>
-                <FormLabel id="distance-radio-buttons-group-label">
-                  Max Distance
-                </FormLabel>
-                <RadioGroup
-                  row
-                  defaultValue={1}
-                  value={stationDistance}
-                  onChange={(e) =>
-                    setStationDistance(parseInt(e.target.value, 10))
+            <TextField
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="City"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <TextField
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="Street Address"
+              value={streetAddress}
+              onChange={(e) => setStreetAddress(e.target.value)}
+            />
+            <TextField
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="Zip Code"
+              value={zip}
+              onChange={(e) => setZip(e.target.value)}
+            />
+            {formError && <FormHelperText>{formErrorText}</FormHelperText>}
+            <FormControl>
+              <FormLabel id="distance-radio-buttons-group-label">
+                Max Distance
+              </FormLabel>
+              <RadioGroup
+                row
+                defaultValue={1}
+                value={stationDistance}
+                onChange={(e) =>
+                  setStationDistance(parseInt(e.target.value, 10))
+                }
+                aria-labelledby="distance-radio-buttons-group-label"
+                name="distance-row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value={1}
+                  control={<Radio />}
+                  label="1 mile"
+                />
+                <FormControlLabel
+                  value={5}
+                  control={<Radio />}
+                  label="5 miles"
+                />
+                <FormControlLabel
+                  value={10}
+                  control={<Radio />}
+                  label="10 miles"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Box>
+          <Box
+            sx={{
+              "& .MuiTextField-root": { my: 1, width: "30ch" },
+            }}
+          >
+            <h3>Advanced</h3>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  disabled={!vehiclePorts}
+                  checked={matchVehicle}
+                  onChange={(e) => setMatchVehicle(e.target.checked)}
+                  icon={
+                    <span
+                      style={{
+                        borderRadius: 2,
+                        border: "1px solid #000",
+                        width: 16,
+                        height: 16,
+                      }}
+                    />
                   }
-                  aria-labelledby="distance-radio-buttons-group-label"
-                  name="distance-row-radio-buttons-group"
-                >
-                  <FormControlLabel
-                    value={1}
-                    control={<Radio />}
-                    label="1 mile"
-                  />
-                  <FormControlLabel
-                    value={5}
-                    control={<Radio />}
-                    label="5 miles"
-                  />
-                  <FormControlLabel
-                    value={10}
-                    control={<Radio />}
-                    label="10 miles"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Box>
-            <Box
-              sx={{
-                "& .MuiTextField-root": { my: 1, width: "30ch" },
+                  checkedIcon={
+                    <span
+                      style={{
+                        borderRadius: 2,
+                        border: "1px solid #000",
+                        width: 16,
+                        height: 16,
+                        backgroundColor: "#000",
+                      }}
+                    />
+                  }
+                />
+              }
+              label="Match My Vehicle's Ports"
+            />
+            <Autocomplete
+              multiple
+              disableCloseOnSelect
+              id="charging-levels"
+              options={chargingLevelArr}
+              defaultValue={[]}
+              value={chargingLevels}
+              filterSelectedOptions
+              onChange={(e, value) => setChargingLevels(value)}
+              renderInput={(params) => (
+                <TextField {...params} label="Charging Level" />
+              )}
+            />
+            <Autocomplete
+              multiple
+              disableCloseOnSelect
+              disabled={matchVehicle}
+              id="station-port-types"
+              options={stationPortArr}
+              defaultValue={[]}
+              value={preferredStationPorts}
+              filterSelectedOptions
+              onChange={(e, value) => setPreferredStationPorts(value)}
+              renderInput={(params) => (
+                <TextField {...params} label="Station Port Type(s)" />
+              )}
+            />
+            <Autocomplete
+              multiple
+              disableCloseOnSelect
+              id="adapter-types"
+              options={[]}
+              // https://stackoverflow.com/a/74913444
+              getOptionLabel={(option) => {
+                return `${option?.vehiclePort} to ${option?.stationPort}`;
               }}
-            >
-              <h3>Advanced</h3>
-              <Autocomplete
-                multiple
-                disableCloseOnSelect
-                id="charging-levels"
-                options={chargingLevelArr}
-                defaultValue={[]}
-                value={chargingLevels}
-                filterSelectedOptions
-                onChange={(e, value) => setChargingLevels(value)}
-                renderInput={(params) => (
-                  <TextField {...params} label="Charging Level" />
-                )}
-              />
-              <Autocomplete
-                multiple
-                disableCloseOnSelect
-                id="station-port-types"
-                options={stationPortArr}
-                defaultValue={[]}
-                value={preferredStationPorts}
-                filterSelectedOptions
-                onChange={(e, value) => setPreferredStationPorts(value)}
-                renderInput={(params) => (
-                  <TextField {...params} label="Station Port Type(s)" />
-                )}
-              />
-              <Autocomplete
-                multiple
-                disableCloseOnSelect
-                id="adapter-types"
-                options={[]}
-                // https://stackoverflow.com/a/74913444
-                getOptionLabel={(option) => {
-                  return `${option?.vehiclePort} to ${option?.stationPort}`;
-                }}
-                defaultValue={[]}
-                value={adapters}
-                filterSelectedOptions
-                onChange={(e, value) => setAdapters(value)}
-                // eslint-disable-next-line no-unused-vars
-                renderInput={(params) => (
-                  <TextField {...params} label="Adapters at Hand" />
-                )}
-              />
-            </Box>
+              defaultValue={[]}
+              value={adapters}
+              filterSelectedOptions
+              onChange={(e, value) => setAdapters(value)}
+              // eslint-disable-next-line no-unused-vars
+              renderInput={(params) => (
+                <TextField {...params} label="Adapters at Hand" />
+              )}
+            />
           </Box>
           <Box>
             <Button
@@ -202,7 +233,7 @@ export default function StationInput({
               Find Juice
             </Button>
           </Box>
-        </div>
+        </Box>
       </FormControl>
     </form>
   );
@@ -230,6 +261,9 @@ StationInput.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  vehiclePorts: PropTypes.string.isRequired,
+  matchVehicle: PropTypes.bool.isRequired,
+  setMatchVehicle: PropTypes.func.isRequired,
   formError: PropTypes.bool.isRequired,
   setFormError: PropTypes.func.isRequired,
   formErrorText: PropTypes.string.isRequired,

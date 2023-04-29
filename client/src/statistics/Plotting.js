@@ -96,7 +96,9 @@ svgLegend
   .attr("y", (d) => d.col * 50 + 15)
   .text(function (d) {
     return legend[d.col];
-  });
+  })
+  .attr("font", "Raleway")
+  .attr("fill", "#555");
 // create class for USMap legend rendering */
 const RD3Component = rd3.Component;
 class CategoricalMapLegend extends React.Component {

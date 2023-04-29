@@ -12,6 +12,7 @@ import {
   Radio,
   RadioGroup,
   Button,
+  Checkbox,
 } from "@mui/material";
 
 import chargingLevelArr from "../assets/charging_levels.json";
@@ -30,6 +31,9 @@ export default function PathInput({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  vehiclePorts,
+  matchVehicle,
+  setMatchVehicle,
   formError,
   setFormError,
   formErrorText,
@@ -122,63 +126,92 @@ export default function PathInput({
                 }}
               >
                 <h3>Advanced</h3>
-                <Autocomplete
-                  multiple
-                  disableCloseOnSelect
-                  id="charging-levels"
-                  options={chargingLevelArr}
-                  defaultValue={[]}
-                  value={chargingLevels}
-                  filterSelectedOptions
-                  onChange={(e, value) => setChargingLevels(value)}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Charging Level" />
-                  )}
-                />
-                <Autocomplete
-                  multiple
-                  disableCloseOnSelect
-                  id="station-port-types"
-                  options={stationPortArr}
-                  defaultValue={[]}
-                  value={preferredStationPorts}
-                  filterSelectedOptions
-                  onChange={(e, value) => setPreferredStationPorts(value)}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Station Port Type(s)" />
-                  )}
-                />
-                <Autocomplete
-                  multiple
-                  disableCloseOnSelect
-                  id="adapter-types"
-                  options={[]}
-                  // https://stackoverflow.com/a/74913444
-                  getOptionLabel={(option) => {
-                    return `${option?.vehiclePort} to ${option?.stationPort}`;
-                  }}
-                  defaultValue={[]}
-                  value={adapters}
-                  filterSelectedOptions
-                  onChange={(e, value) => setAdapters(value)}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Adapters at Hand" />
-                  )}
-                />
-              </Box>
-            </Box>
-          </Box>
-          <Box>
-            <Button
-              variant="contained"
-              sx={{ py: 1, my: 3, width: "100%" }}
-              onClick={handleSubmit}
-            >
-              Show My Juice Track
-            </Button>
-          </Box>
-        </div>
-      </FormControl>
+          <FormControlLabel
+            control={
+              <Checkbox
+                disabled={!vehiclePorts}
+                checked={matchVehicle}
+                onChange={(e) => setMatchVehicle(e.target.checked)}
+                icon={
+                  <span
+                    style={{
+                      borderRadius: 2,
+                      border: "1px solid #000",
+                      width: 16,
+                      height: 16,
+                    }}
+                  />
+                }
+                checkedIcon={
+                  <span
+                    style={{
+                      borderRadius: 2,
+                      border: "1px solid #000",
+                      width: 16,
+                      height: 16,
+                      backgroundColor: "#000",
+                    }}
+                  />
+                }
+              />
+            }
+            label="Match My Vehicle's Ports"
+          />
+          <Autocomplete
+            multiple
+            disableCloseOnSelect
+            id="charging-levels"
+            options={chargingLevelArr}
+            defaultValue={[]}
+            value={chargingLevels}
+            filterSelectedOptions
+            onChange={(e, value) => setChargingLevels(value)}
+            renderInput={(params) => (
+              <TextField {...params} label="Charging Level" />
+            )}
+          />
+          <Autocomplete
+            multiple
+            disableCloseOnSelect
+            disabled={matchVehicle}
+            id="station-port-types"
+            options={stationPortArr}
+            defaultValue={[]}
+            value={preferredStationPorts}
+            filterSelectedOptions
+            onChange={(e, value) => setPreferredStationPorts(value)}
+            renderInput={(params) => (
+              <TextField {...params} label="Station Port Type(s)" />
+            )}
+          />
+          <Autocomplete
+            multiple
+            disableCloseOnSelect
+            id="adapter-types"
+            options={[]}
+            // https://stackoverflow.com/a/74913444
+            getOptionLabel={(option) => {
+              return `${option?.vehiclePort} to ${option?.stationPort}`;
+            }}
+            defaultValue={[]}
+            value={adapters}
+            filterSelectedOptions
+            onChange={(e, value) => setAdapters(value)}
+            renderInput={(params) => (
+              <TextField {...params} label="Adapters at Hand" />
+            )}
+          />
+        </Box>
+        <Box>
+          <Button
+            variant="contained"
+            sx={{ py: 1, my: 3, width: "100%" }}
+            onClick={handleSubmit}
+          >
+            Show My Juice Track
+          </Button>
+        </Box>
+      </Box>
     </form>
   );
 }
@@ -201,6 +234,9 @@ PathInput.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  vehiclePorts: PropTypes.string.isRequired,
+  matchVehicle: PropTypes.bool.isRequired,
+  setMatchVehicle: PropTypes.func.isRequired,
   formError: PropTypes.bool.isRequired,
   setFormError: PropTypes.func.isRequired,
   formErrorText: PropTypes.string.isRequired,

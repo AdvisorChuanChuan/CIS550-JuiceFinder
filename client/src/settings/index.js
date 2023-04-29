@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Container,
+  CssBaseline,
   TextField,
   Typography,
   Avatar,
@@ -12,6 +13,7 @@ import {
   DialogTitle,
   DialogContent,
   MenuItem,
+  Grid,
 } from "@mui/material";
 import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
 import { styled } from "@mui/system";
@@ -220,236 +222,314 @@ function Settings() {
   };
 
   return (
-    <StyledContainer
-      maxWidth="md"
-      sx={{
-        marginTop: theme.spacing(2),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: theme.palette.background.paper,
-        borderRadius: theme.shape.borderRadius,
-        paddingTop: theme.spacing(6),
-        paddingBottom: theme.spacing(10),
-        paddingLeft: theme.spacing(6),
-        paddingRight: theme.spacing(6),
-        boxShadow: theme.shadows[3],
-      }}
-    >
-      <Typography
-        component="h1"
-        variant="h3"
-        color="primary"
-        sx={{ textAlign: "center" }}
-      >
-        JuiceFinder
-      </Typography>
-      <Avatar
-        sx={{
-          margin: theme.spacing(1),
-          color: theme.palette.secondary.main,
-          backgroundColor: theme.palette.success.main,
+    <StyledContainer maxWidth="md">
+      <CssBaseline />
+      <div
+        style={{
+          marginTop: theme.spacing(2),
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.background.paper,
+          borderRadius: theme.shape.borderRadius,
+          paddingTop: theme.spacing(3),
+          paddingBottom: theme.spacing(3),
+          paddingLeft: theme.spacing(20),
+          paddingRight: theme.spacing(20),
+          marginBottom: theme.spacing(2),
+          boxShadow: theme.shadows[3],
         }}
       >
-        <OfflineBoltIcon />
-      </Avatar>
-      <div>
-        {errorMsg && (
-          <Box>
-            <Typography color="error">{errorMsg}</Typography>
-          </Box>
-        )}
-        <Box sx={{ fontWeight: "Bold", marginTop: theme.spacing(3) }}>
-          <Typography variant="h4">Account Information</Typography>
-        </Box>
-        <Typography>
-          <b>Email:</b> {currentUser.email}
+        <Typography
+          component="h1"
+          variant="h3"
+          color="primary"
+          sx={{ textAlign: "center" }}
+        >
+          JuiceFinder
         </Typography>
-        {/* <Typography>
-          <b>User ID:</b> {currentUser.uid}
-        </Typography> */}
-
-        {vehicleInfo && (
-          <div style={{ marginTop: theme.spacing(3) }}>
-            <Box sx={{ fontWeight: "Bold" }}>
-              <Typography variant="h4">Saved Vehicle Information</Typography>
+        <Avatar
+          sx={{
+            margin: theme.spacing(1),
+            color: theme.palette.secondary.main,
+            backgroundColor: theme.palette.primary.main,
+          }}
+        >
+          <OfflineBoltIcon />
+        </Avatar>
+        <div>
+          {errorMsg && (
+            <Box>
+              <Typography color="error">{errorMsg}</Typography>
             </Box>
-            {/* <Typography>
-              <b>Vehicle ID:</b> {vehicleInfo.id}
-            </Typography> */}
-            <Typography>
-              <b>Brand:</b> {vehicleInfo.brand}
+          )}
+          <Box sx={{ fontWeight: "Bold", marginTop: theme.spacing(3) }}>
+            <Typography variant="h4" sx={{ color: theme.palette.primary.main }}>
+              Account Information
             </Typography>
-            <Typography>
-              <b>Type:</b> {vehicleInfo.vehicle_type}
-            </Typography>
-            <Typography>
-              <b>Model:</b> {vehicleInfo.model}
-            </Typography>
-            <Typography>
-              <b>Release Year:</b> {vehicleInfo.release_year}
-            </Typography>
-            {vehicleInfo.variant && (
+          </Box>
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
               <Typography>
-                <b>Variant:</b> {vehicleInfo.variant}
+                <b>Email:</b>
               </Typography>
-            )}
-            <Typography>
-              <b>Vehicle Type:</b> {vehicleInfo.type}
-            </Typography>
-            {vehicleInfo.usable_battery_size && (
-              <Typography>
-                <b>Usable Battery Size:</b> {vehicleInfo.usable_battery_size}
-              </Typography>
-            )}
-            {vehicleInfo.energy_consumption && (
-              <Typography>
-                <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
-              </Typography>
+            </Grid>
+            <Grid item xs={9}>
+              <Typography>{currentUser.email}</Typography>
+            </Grid>
+          </Grid>
+
+          <div>
+            {vehicleInfo && (
+              <div style={{ marginTop: theme.spacing(3) }}>
+                <Box sx={{ fontWeight: "Bold" }}>
+                  <Typography
+                    variant="h4"
+                    sx={{ color: theme.palette.primary.main }}
+                  >
+                    Saved Vehicle Information
+                  </Typography>
+                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Brand:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.brand}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Type:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.vehicle_type}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Model:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.model}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Release Year:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.release_year}</Typography>
+                  </Grid>
+                  {vehicleInfo.variant && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Variant:</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>{vehicleInfo.variant}</Typography>
+                      </Grid>
+                    </>
+                  )}
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Vehicle Type:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.type}</Typography>
+                  </Grid>
+                  {vehicleInfo.usable_battery_size && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Usable Battery Size:</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>
+                          {vehicleInfo.usable_battery_size}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
+                  {vehicleInfo.energy_consumption && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Energy Consumption:</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>
+                          {vehicleInfo.energy_consumption}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
+                  {vehicleInfo.port && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Port(s):</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>{vehicleInfo.port}</Typography>
+                      </Grid>
+                    </>
+                  )}
+                </Grid>
+              </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
 
-      <div style={{ marginTop: theme.spacing(1) }}>
-        <Button onClick={handleOpenPopup} variant="contained" color="primary">
-          Update Saved Vehicle
-        </Button>
-        <Dialog open={openPopup} onClose={handleClosePopup}>
-          <DialogTitle>
-            <Box sx={{ fontWeight: "Bold" }}>
-              <Typography variant="h4">Save a new vehicle</Typography>
-            </Box>
-          </DialogTitle>
-          <DialogContent>
-            {errorMsgPopup && (
-              <Box>
-                <Typography color="error">{errorMsgPopup}</Typography>
+        <div style={{ marginTop: theme.spacing(3) }}>
+          <Button onClick={handleOpenPopup} variant="contained" color="primary">
+            Update Saved Vehicle
+          </Button>
+          <Dialog open={openPopup} onClose={handleClosePopup}>
+            <DialogTitle>
+              <Box sx={{ fontWeight: "Bold" }}>
+                <Typography variant="h4">Save a new vehicle</Typography>
               </Box>
-            )}
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
-              }}
-            >
-              {/* Brand Text Field */}
-              <TextField
-                select
-                variant="outlined"
-                color="primary"
-                label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              >
-                {Array.from(new Set(dataArray.map((item) => item.brand))).map(
-                  (option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  )
-                )}
-              </TextField>
-
-              {/* Model Text Field */}
-              <TextField
-                select
-                variant="outlined"
-                color="primary"
-                label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-              >
-                {Array.from(
-                  new Set(
-                    dataArray
-                      .filter((item) => item.brand === brand)
-                      .map((item) => item.model)
-                  )
-                ).map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              {/* Release Year Text Field */}
-              {Array.from(
-                new Set(
-                  dataArray
-                    .filter(
-                      (item) => item.brand === brand && item.model === model
-                    )
-                    .map((item) => item.release_year)
-                )
-              ).length > 0 && (
+            </DialogTitle>
+            <DialogContent>
+              {errorMsgPopup && (
                 <Box>
-                  <TextField
-                    select
-                    variant="outlined"
-                    color="primary"
-                    label="Release Year"
-                    value={parseFloat(releaseYear)}
-                    onChange={(e) => {
-                      setReleaseYear(e.target.value);
-                    }}
-                  >
-                    {Array.from(
-                      new Set(
-                        dataArray
-                          .filter(
-                            (item) =>
-                              item.brand === brand && item.model === model
-                          )
-                          .map((item) => parseInt(item.release_year, 10))
-                      )
-                    ).map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Box>
-              )}
-              {/* Variant Text Field */}
-              {availableVariants[0] !== "" && (
-                <Box>
-                  <TextField
-                    select
-                    variant="outlined"
-                    color="primary"
-                    label="Variant"
-                    value={variant}
-                    onChange={(e) => setVariant(e.target.value)}
-                  >
-                    {availableVariants.map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </TextField>
+                  <Typography color="error">{errorMsgPopup}</Typography>
                 </Box>
               )}
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-end",
-                  marginTop: "auto",
+                  flexDirection: "column",
+                  "& .MuiTextField-root": { m: 1, width: "25ch" },
                 }}
               >
-                <Button
-                  variant="contained"
+                {/* Brand Text Field */}
+                <TextField
+                  select
+                  variant="outlined"
                   color="primary"
-                  onClick={handleUpdateVehicle}
+                  label="Brand"
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
                 >
-                  Update Vehicle
-                </Button>
+                  {Array.from(new Set(dataArray.map((item) => item.brand))).map(
+                    (option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    )
+                  )}
+                </TextField>
+
+                {/* Model Text Field */}
+                <TextField
+                  select
+                  variant="outlined"
+                  color="primary"
+                  label="Model"
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                >
+                  {Array.from(
+                    new Set(
+                      dataArray
+                        .filter((item) => item.brand === brand)
+                        .map((item) => item.model)
+                    )
+                  ).map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                {/* Release Year Text Field */}
+                {Array.from(
+                  new Set(
+                    dataArray
+                      .filter(
+                        (item) => item.brand === brand && item.model === model
+                      )
+                      .map((item) => item.release_year)
+                  )
+                ).length > 0 && (
+                  <Box>
+                    <TextField
+                      select
+                      variant="outlined"
+                      color="primary"
+                      label="Release Year"
+                      value={parseFloat(releaseYear)}
+                      onChange={(e) => {
+                        setReleaseYear(e.target.value);
+                      }}
+                    >
+                      {Array.from(
+                        new Set(
+                          dataArray
+                            .filter(
+                              (item) =>
+                                item.brand === brand && item.model === model
+                            )
+                            .map((item) => parseInt(item.release_year, 10))
+                        )
+                      ).map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Box>
+                )}
+                {/* Variant Text Field */}
+                {availableVariants[0] !== "" && (
+                  <Box>
+                    <TextField
+                      select
+                      variant="outlined"
+                      color="primary"
+                      label="Variant"
+                      value={variant}
+                      onChange={(e) => setVariant(e.target.value)}
+                    >
+                      {availableVariants.map((option) => (
+                        <MenuItem key={option} value={option}>
+                          {option}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Box>
+                )}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-end",
+                    marginTop: "auto",
+                  }}
+                >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleUpdateVehicle}
+                  >
+                    Update Vehicle
+                  </Button>
+                </Box>
               </Box>
-            </Box>
-          </DialogContent>
-        </Dialog>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
     </StyledContainer>
   );

@@ -21,11 +21,20 @@ router.post("/info", checkAuth, async (req, res) => {
     const userId = req.user.uid;
 
     const result = await queryAsync(
-      "SELECT * FROM users u JOIN electric_vehicles v ON u.vid=v.id WHERE u.uid = ?",
+      `SELECT * 
+      FROM users u 
+      JOIN electric_vehicles v ON u.vid=v.id 
+      JOIN vehicle_ports p ON v.id = p.vid
+      WHERE u.uid = ?`,
       [userId]
     );
 
-    if (result.length > 0) {
+    if (result.length > 1) {
+      const ports = result.map((d) => d.port);
+      const portString = ports.join(",");
+      result[0].port = portString;
+      res.json(result[0]);
+    } else if (result.length === 1) {
       res.json(result[0]);
     } else {
       res.json({});
