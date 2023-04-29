@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, Tabs, Tab, AppBar } from "@mui/material";
 import PropTypes from "prop-types";
 import StationInput from "./StationInput";
@@ -47,7 +47,6 @@ export default function InputTabs({
   setPreferredStationPorts,
   adapters,
   setAdapters,
-  vehiclePorts,
   stationFormError,
   setStationFormError,
   stationFormErrorText,
@@ -66,14 +65,6 @@ export default function InputTabs({
   handlePathInputSubmit,
 }) {
   const [value, setValue] = useState(0);
-  const [matchVehicle, setMatchVehicle] = useState(false);
-  useEffect(() => {
-    if (matchVehicle) {
-      setPreferredStationPorts(vehiclePorts.split(","));
-    } else {
-      setPreferredStationPorts([]);
-    }
-  }, [matchVehicle]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -112,9 +103,6 @@ export default function InputTabs({
           setPreferredStationPorts={setPreferredStationPorts}
           adapters={adapters}
           setAdapters={setAdapters}
-          vehiclePorts={vehiclePorts}
-          matchVehicle={matchVehicle}
-          setMatchVehicle={setMatchVehicle}
           formError={stationFormError}
           setFormError={setStationFormError}
           formErrorText={stationFormErrorText}
@@ -136,9 +124,6 @@ export default function InputTabs({
           setPreferredStationPorts={setPreferredStationPorts}
           adapters={adapters}
           setAdapters={setAdapters}
-          vehiclePorts={vehiclePorts}
-          matchVehicle={matchVehicle}
-          setMatchVehicle={setMatchVehicle}
           formError={pathFormError}
           setFormError={setPathFormError}
           formErrorText={pathFormErrorText}
@@ -172,7 +157,6 @@ InputTabs.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
-  vehiclePorts: PropTypes.string.isRequired,
   stationFormError: PropTypes.bool.isRequired,
   setStationFormError: PropTypes.func.isRequired,
   stationFormErrorText: PropTypes.string.isRequired,

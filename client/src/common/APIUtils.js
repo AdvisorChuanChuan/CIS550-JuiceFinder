@@ -19,7 +19,7 @@ export const getNearbyStations = async (
       `http://${config.server_host}:${config.server_port}/stations/` +
         `${isElectric ? "electric/" : ""}` +
         `?latitude=${location.latitude}&longitude=${location.longitude}` +
-        `&mileDistance=${maxDistance}&pageSize=${150}&orderBy=sid` +
+        `&mileDistance=${maxDistance}&pageSize=${150}` +
         `${chargeLevels ? `&chargeLevels=${chargeLevels}` : ""}` +
         `${stationPorts ? `&stationPorts=${stationPorts}` : ""}`
     );
@@ -77,32 +77,5 @@ export const getStationsNearPath = async (
   } catch (err) {
     console.error(err);
     return [];
-  }
-};
-
-export const fetchVehicleInfo = async (currentUser) => {
-  try {
-    const token = await currentUser.getIdToken(/* forceRefresh */ true);
-
-    const response = await fetch(
-      `http://${config.server_host}:${config.server_port}/users/info`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    }
-    console.error("Vehicle info is empty");
-    return {};
-  } catch (error) {
-    console.error("Error fetching vehicle info:", error);
-    return {};
   }
 };

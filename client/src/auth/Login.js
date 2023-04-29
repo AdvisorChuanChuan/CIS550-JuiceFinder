@@ -143,7 +143,7 @@ function Login() {
           sx={{
             margin: theme.spacing(1),
             color: theme.palette.secondary.main,
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.success.main,
           }}
         >
           <OfflineBoltIcon />

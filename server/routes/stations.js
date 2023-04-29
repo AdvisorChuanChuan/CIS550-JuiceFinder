@@ -131,7 +131,7 @@ router.get("/electric", async (req, res) => {
             ? ", ".concat(additionalSelectAttrs.join(", "))
             : ""
         }
-    FROM materialized_view_electric_stations_denorm E
+    FROM stations S NATURAL JOIN electric_stations E NATURAL JOIN station_ports SP
     ${whereClause}
     GROUP BY sid
     ORDER BY ${orderByObject}
@@ -177,7 +177,7 @@ router.get("/:id", (req, res) => {
 router.get("/electric/:id", (req, res) => {
   const query = `
         SELECT *, GROUP_CONCAT(port) AS port
-        FROM materialized_view_electric_stations_denorm E
+        FROM stations NATURAL JOIN electric_stations NATURAL JOIN station_ports
         WHERE sid='${req.params.id}'
         GROUP BY sid
     `;
