@@ -4,10 +4,10 @@ const lightThemeOptions = {
   palette: {
     type: "light",
     primary: {
-      main: "#05668D",
+      main: "#090088",
     },
     secondary: {
-      main: "#F0F3BD",
+      main: "#ecb939",
     },
     success: {
       main: "#02C39A",
@@ -103,10 +103,10 @@ const darkThemeOptions = {
   palette: {
     type: "dark",
     primary: {
-      main: "#F0F3BD",
+      main: "#a8e6cf",
     },
     secondary: {
-      main: "#02C39A",
+      main: "#ff8b94",
     },
     success: {
       main: "#02C39A",
@@ -120,7 +120,7 @@ const darkThemeOptions = {
     },
     background: {
       default: "#121212",
-      paper: "#3c3e40",
+      paper: "#282b30",
       landing: "#121212",
       header: "#121212",
     },
